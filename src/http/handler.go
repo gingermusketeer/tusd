@@ -162,6 +162,8 @@ func (h *Handler) patchFile(w http.ResponseWriter, r *http.Request, id string) {
 		h.err(err, w, http.StatusInternalServerError)
 		return
 	}
+
+	w.WriteHeader(http.StatusNoContent)
 }
 
 func (h *Handler) headFile(w http.ResponseWriter, r *http.Request, id string) {
@@ -173,6 +175,7 @@ func (h *Handler) headFile(w http.ResponseWriter, r *http.Request, id string) {
 	}
 
 	w.Header().Set("Offset", fmt.Sprintf("%d", info.Offset))
+	w.WriteHeader(http.StatusNoContent)
 }
 
 // GET requests on files aren't part of the protocol yet,
